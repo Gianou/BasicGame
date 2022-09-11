@@ -1,0 +1,11 @@
+10 X = 20 : Y = 12
+12 GET K$
+13 IF K$ = "W" AND Y > 1 THEN Y = Y - 1
+14 IF K$ = "S" AND Y < 24 THEN Y = Y + 1
+15 HOME
+18 HTAB X : VTAB Y
+20 PRINT ""
+30 A = A + 1
+40 FOR I = 0 TO 1
+50 NEXT I
+100 GOTO 12
