@@ -4,12 +4,18 @@
 19 REM ++++++++++++++++++++++++++++++++++++
 20 X = 6 : Y = 12
 22 OLDY = 12
-25 CPT = 0
-30 DIM CEILING1(4,39)
-40 DIM FLOOR1(4,39)
-50 MX = 40 : MY = 12
-52 OMX = 40
-55 SCO = 0
+24 CPT = 0
+26 DIM CEILING1(4,39)
+28 DIM FLOOR1(4,39)
+30 MX = 40 : MY = 12
+32 OMX = 40
+34 SCO = 0
+
+47 REM ++++++++++++++++++++++++++++++++++++
+48 REM HOME SCREEN
+49 REM ++++++++++++++++++++++++++++++++++++
+50 PRINT "TO START PRESS ANY KEY
+52 GET A$
 
 97 REM ++++++++++++++++++++++++++++++++++++
 98 REM FILL AND PRINT CEILING
@@ -24,10 +30,10 @@
 1045 NEXT I
 1050 RETURN
 
-117 REM ++++++++++++++++++++++++++++++++++++
-118 REM FILL AND PRINT FLOOR
-119 REM ++++++++++++++++++++++++++++++++++++
-120 GOSUB 2000
+107 REM ++++++++++++++++++++++++++++++++++++
+108 REM FILL AND PRINT FLOOR
+109 REM ++++++++++++++++++++++++++++++++++++
+110 GOSUB 2000
 2000 HTAB 1 : VTAB 20
 2005 FOR I = 0 TO 4
 2010 FOR J = 0 TO 39
@@ -37,17 +43,29 @@
 2045 NEXT I
 2050 RETURN
 
+117 REM ++++++++++++++++++++++++++++++++++++
+118 REM SHOW CONTROLS
+119 REM ++++++++++++++++++++++++++++++++++++
+120 REM HTAB 32 : VTAB 1
+122 REM PRINT "W = UP"
+124 REMHTAB 32 : VTAB 2 : PRINT "S = DOWN"
+126 REMHTAB 32 : VTAB 3 : PRINT "Q = QUIT"
+128 REMHTAB 32 : VTAB 4 : PRINT "D/A = stay"
+
 147 REM ++++++++++++++++++++++++++++++++++++
 148 REM DISPLAY SCORE
 149 REM ++++++++++++++++++++++++++++++++++++
-150 HTAB 1 : VTAB 1
-160 PRINT "SCORE : "; : PRINT SCO; : PRINT " "
+150 HTAB 1 : VTAB 2
+158 PRINT CHR$ (91); :PRINT " ";
+160 PRINT "SCORE : "; : PRINT SCO; : PRINT " ";
+162 PRINT CHR$ (93);
 165 SCO = SCO + 1
 
 197 REM ++++++++++++++++++++++++++++++++++++
 198 REM GET USER INPUT
 199 REM ++++++++++++++++++++++++++++++++++++
 200 IF PEEK (-16384)>127 THEN GET K$
+205 IF K$ ="Q" THEN GOTO 5000
 210 IF K$ = "W" AND Y > 5 THEN Y = Y - 1
 220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
 250 POKE -16368,0
@@ -90,5 +108,11 @@
 900 GOTO 150
 
 5000 HOME
-5010 HTAB 16 : VTAB 12
+5010 HTAB 16 : VTAB 6
 5020 PRINT "GAME OVER"
+5030 HTAB 10 : VTAB 10
+5040 PRINT "YOUR SCORE : "
+5050 HTAB 23 : VTAB 10
+5060 PRINT SCO
+5070 HTAB 10 : VTAB 12
+5080 PRINT "THANKS FOR PLAYING!"
