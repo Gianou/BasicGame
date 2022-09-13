@@ -1,0 +1,84 @@
+10 HOME
+17 REM ++++++++++++++++++++++++++++++++++++
+18 REM VARIABLE DECLARATION
+19 REM ++++++++++++++++++++++++++++++++++++
+20 X = 6 : Y = 12
+22 OLDY = 12
+25 CPT = 0
+30 DIM CEILING1(4,39)
+40 DIM FLOOR1(4,39)
+50 MX = 40 : MY = 12
+52 OMX = 40
+
+97 REM ++++++++++++++++++++++++++++++++++++
+98 REM FILL AND PRINT CEILING
+99 REM ++++++++++++++++++++++++++++++++++++
+100 GOSUB 1000
+1000 HTAB 1 : VTAB 1
+1005 FOR I = 0 TO 4
+1010 FOR J = 0 TO 39
+1020 CEILING1(I, J) = 1
+1030 PRINT CEILING1(I, J);
+1040 NEXT J
+1045 NEXT I
+1050 RETURN
+
+117 REM ++++++++++++++++++++++++++++++++++++
+118 REM FILL AND PRINT FLOOR
+119 REM ++++++++++++++++++++++++++++++++++++
+120 GOSUB 2000
+2000 HTAB 1 : VTAB 20
+2005 FOR I = 0 TO 4
+2010 FOR J = 0 TO 39
+2020 CEILING1(I, J) = 1
+2030 PRINT CEILING1(I, J);
+2040 NEXT J
+2045 NEXT I
+2050 RETURN
+
+197 REM ++++++++++++++++++++++++++++++++++++
+198 REM GET USER INPUT
+199 REM ++++++++++++++++++++++++++++++++++++
+200 IF PEEK (-16384)>127 THEN GET K$
+210 IF K$ = "W" AND Y > 5 THEN Y = Y - 1
+220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
+250 POKE -16368,0
+
+247 REM ++++++++++++++++++++++++++++++++++++
+248 REM PRINT PLAYER
+249 REM ++++++++++++++++++++++++++++++++++++
+252 CPT = CPT + 1
+270 HTAB X : VTAB OLDY
+275 PRINT "   "
+300 HTAB X : VTAB Y
+305 OLDY = Y 
+310 IF CPT < 3 THEN PRINT "^0^";
+320 IF CPT >=3 THEN PRINT "-0-";
+330 IF CPT >= 6 THEN CPT = 0
+
+397 REM ++++++++++++++++++++++++++++++++++++
+398 REM PRINT ENNEMY
+399 REM ++++++++++++++++++++++++++++++++++++
+400 HTAB OMX : VTAB MY
+405 PRINT " "
+410 HTAB MX : VTAB MY
+420 PRINT "#"
+425 OMX = MX
+430 MX = MX -1
+435 IF MX <1 THEN MX = 40
+
+497 REM ++++++++++++++++++++++++++++++++++++
+498 REM CHECK COLLISION
+499 REM ++++++++++++++++++++++++++++++++++++
+500 IF MX = X AND MY = Y THEN GOTO 5000
+
+797 REM ++++++++++++++++++++++++++++++++++++
+798 REM sLOW GAME
+799 REM ++++++++++++++++++++++++++++++++++++
+800 FOR T = 0 TO 700 : NEXT
+
+900 GOTO 200
+
+5000 HOME
+5010 HTAB 16 : VTAB 12
+5020 PRINT "GAME OVER"
