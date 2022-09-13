@@ -7,6 +7,8 @@
 25 CPT = 0
 30 DIM CEILING1(4,39)
 40 DIM FLOOR1(4,39)
+50 MX = 40 : MY = 12
+52 OMX = 40
 
 97 REM ++++++++++++++++++++++++++++++++++++
 98 REM FILL AND PRINT CEILING
@@ -45,7 +47,6 @@
 247 REM ++++++++++++++++++++++++++++++++++++
 248 REM PRINT PLAYER
 249 REM ++++++++++++++++++++++++++++++++++++
-
 252 CPT = CPT + 1
 270 HTAB X : VTAB OLDY
 275 PRINT "   "
@@ -56,8 +57,21 @@
 330 IF CPT >= 6 THEN CPT = 0
 
 397 REM ++++++++++++++++++++++++++++++++++++
-398 REM SLOW GAME
+398 REM PRINT ENNEMY
 399 REM ++++++++++++++++++++++++++++++++++++
-400 FOR T = 0 TO 1000 : NEXT
+400 HTAB OMX : VTAB MY
+405 PRINT " "
+410 HTAB MX : VTAB MY
+420 PRINT "#"
+425 OMX = MX
+430 MX = MX -1
+435 IF MX <1 THEN MX = 40
 
-500 GOTO 200
+
+797 REM ++++++++++++++++++++++++++++++++++++
+798 REM sLOW GAME
+799 REM ++++++++++++++++++++++++++++++++++++
+800 FOR T = 0 TO 700 : NEXT
+
+900 GOTO 200
+
