@@ -66,7 +66,7 @@
 199 REM ++++++++++++++++++++++++++++++++++++
 200 IF PEEK (-16384)>127 THEN GET K$
 205 IF K$ ="Q" THEN GOTO 5000
-210 IF K$ = "W" AND Y > 5 THEN Y = Y - 1
+210 IF K$ = "W" AND Y > 6 THEN Y = Y - 1
 220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
 250 POKE -16368,0
 
@@ -77,11 +77,15 @@
 252 CPT = CPT + 1
 270 HTAB X : VTAB OLDY
 275 PRINT "   "
+280 HTAB X+1 : VTAB OLDY - 1
+285 PRINT " "
 300 HTAB X : VTAB Y
 305 OLDY = Y 
 310 IF CPT < 3 THEN PRINT "^0^";
 320 IF CPT >=3 THEN PRINT "-0-";
 330 IF CPT >= 6 THEN CPT = 0
+340 HTAB X+1 : VTAB Y-1
+350 PRINT "m"
 
 397 REM ++++++++++++++++++++++++++++++++++++
 398 REM PRINT ENNEMY
@@ -98,6 +102,7 @@
 498 REM CHECK COLLISION
 499 REM ++++++++++++++++++++++++++++++++++++
 500 IF MX = X AND MY = Y THEN GOTO 5000
+510 IF MX = X AND MY = Y-1 THEN GOTO 5000
 
 797 REM ++++++++++++++++++++++++++++++++++++
 798 REM SLOW GAME
