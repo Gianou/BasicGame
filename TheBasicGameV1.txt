@@ -3,11 +3,13 @@
 18 REM VARIABLE DECLARATION
 19 REM ++++++++++++++++++++++++++++++++++++
 20 X = 20 : Y = 12
+25 CPT = 0
 30 DIM CEILING1(39)
+40 DIM FLOOR1(39)
 
-997 REM ++++++++++++++++++++++++++++++++++++
-998 REM FILL AND PRINT CEILING
-999 REM ++++++++++++++++++++++++++++++++++++
+97 REM ++++++++++++++++++++++++++++++++++++
+98 REM FILL AND PRINT CEILING
+99 REM ++++++++++++++++++++++++++++++++++++
 100 GOSUB 1000
 1000 HTAB 1 : VTAB 1
 1010 FOR I = 0 TO 39
@@ -15,6 +17,17 @@
 1030 PRINT CEILING1(I);
 1040 NEXT
 1050 RETURN
+
+117 REM ++++++++++++++++++++++++++++++++++++
+118 REM FILL AND PRINT CEILING
+119 REM ++++++++++++++++++++++++++++++++++++
+120 GOSUB 2000
+2000 HTAB 1 : VTAB 23
+2010 FOR I = 0 TO 39
+2020 FLOOR1(I) = 1
+2030 PRINT FLOOR1(I);
+2040 NEXT
+2050 RETURN
 
 197 REM ++++++++++++++++++++++++++++++++++++
 198 REM GET USER INPUT
@@ -28,6 +41,9 @@
 248 REM PRINT PLAYER
 249 REM ++++++++++++++++++++++++++++++++++++
 250 HOME
+252 CPT = CPT + 1
 300 HTAB X : VTAB Y
-310 PRINT "0"
+310 IF CPT < 3 THEN PRINT "^0^";
+320 IF CPT >=3 THEN PRINT "-0-";
+330 IF CPT >= 6 THEN CPT = 0
 400 GOTO 100
