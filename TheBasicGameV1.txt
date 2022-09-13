@@ -67,6 +67,10 @@
 430 MX = MX -1
 435 IF MX <1 THEN MX = 40
 
+497 REM ++++++++++++++++++++++++++++++++++++
+498 REM CHECK COLLISION
+499 REM ++++++++++++++++++++++++++++++++++++
+500 IF MX = X AND MY = Y THEN GOTO 5000
 
 797 REM ++++++++++++++++++++++++++++++++++++
 798 REM sLOW GAME
@@ -75,3 +79,6 @@
 
 900 GOTO 200
 
+5000 HOME
+5010 HTAB 16 : VTAB 12
+5020 PRINT "GAME OVER"
