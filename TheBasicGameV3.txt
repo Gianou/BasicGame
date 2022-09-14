@@ -44,8 +44,6 @@
 1145 HTAB 12 : VTAB 21 : PRINT "THE BAT ADVENTURE"
 1150 RETURN
 
-
-
 117 REM ++++++++++++++++++++++++++++++++++++
 118 REM SHOW CONTROLS
 119 REM ++++++++++++++++++++++++++++++++++++
@@ -74,7 +72,7 @@
 199 REM ++++++++++++++++++++++++++++++++++++
 200 IF PEEK (-16384)>127 THEN GET K$
 205 IF K$ ="Q" THEN GOTO 5000
-210 IF K$ = "W" AND Y > 6 THEN Y = Y - 1
+210 IF K$ = "W" AND Y > 7 THEN Y = Y - 1
 220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
 250 POKE -16368,0
 
@@ -181,7 +179,7 @@
 6032 OMX = 40
 6040 MX = 40 : MY = 12
 6042 OMX = 40
-6044 SX = 26 : SY = 6 : OSX = 26
+6044 SX = 12 : SY = 6 : OSX = 26
 6046 TX = 34 : TY = 6 : OTX = 40
    
 6040 HOME
@@ -199,7 +197,7 @@
 3014 SPD = 500
 3199 REM MONSTER'S VARIABLES
 3200 MX = 40 : MY = 12 : OMX = 40
-3210 SX = 26 : SY = 6 : OSX = 26
+3210 SX = 12 : SY = 6 : OSX = 26
 3220 TX = 34 : TY = 6 : OTX = 40
 
 3400 RETURN
