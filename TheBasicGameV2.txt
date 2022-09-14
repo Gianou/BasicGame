@@ -13,25 +13,28 @@
 36 BST = 0
 38 SPD = 400
 
+46 A = 4
 47 REM ++++++++++++++++++++++++++++++++++++
 48 REM HOME SCREEN
 49 REM ++++++++++++++++++++++++++++++++++++
 50 HTAB 12 : VTAB 4 : PRINT "THE BAT ADVENTURE"
-51 HTAB 30 : VTAB 5 : PRINT "by gianad"
-52 HTAB 2 : VTAB 8 : PRINT "Controls :"
-54 HTAB 6 : VTAB 10 : PRINT "Up = W"
-56 HTAB 6 : VTAB 12 : PRINT "Down = S"
-58 HTAB 6 : VTAB 14 : PRINT "Any key = Stop moving"
-60 HTAB 6 : VTAB 16 : PRINT "Quit game = Q"
-70 HTAB 2 : VTAB 20 : PRINT "To start press any key"
-72 HTAB 2 : VTAB 21 : GET A$ : HOME
+56 HTAB 3 : VTAB 8 : PRINT "# Avoid the danger of the cave and #"
+57 HTAB 3 : VTAB 9 : PRINT "#         reach the exit           #"
+61 HTAB 30 : VTAB 5 : PRINT "by gianad"
+62 HTAB 2 : VTAB 8 + A : PRINT "Controls :"
+64 HTAB 6 : VTAB 10 + A: PRINT "Up = W"
+66 HTAB 6 : VTAB 12 + A: PRINT "Down = S"
+68 HTAB 6 : VTAB 14 + A: PRINT "Any key = Stop moving"
+69 HTAB 6 : VTAB 16 + A : PRINT "Quit game = Q"
+70 HTAB 2 : VTAB 19 + A: PRINT "To start press any key"
+72 HTAB 24 : VTAB 19 + A: GET A$ : HOME
 
 97 REM ++++++++++++++++++++++++++++++++++++
 98 REM FILL AND PRINT CEILING
 99 REM ++++++++++++++++++++++++++++++++++++
 100 GOSUB 1000
 1000 HTAB 1 : VTAB 1
-1005 FOR I = 0 TO 4
+1005 FOR I = 1 TO 4
 1010 FOR J = 0 TO 39
 1020 CEILING1(I, J) = 255
 1030 PRINT CHR$(CEILING1(I, J));
@@ -43,7 +46,7 @@
 108 REM FILL AND PRINT FLOOR
 109 REM ++++++++++++++++++++++++++++++++++++
 110 GOSUB 20000
-20000 HTAB 1 : VTAB 20
+20000 HTAB 1 : VTAB 19
 20005 FOR I = 0 TO 4
 20010 FOR J = 0 TO 39
 20020 CEILING1(I, J) = 255
@@ -76,7 +79,7 @@
 167 IF SCO > BST THEN BST = SCO
 170 HTAB 1 : VTAB 3
 172 PRINT CHR$ (91); :PRINT " ";
-174 PRINT "BEST : "; : PRINT BST; : PRINT " ";
+174 PRINT "BEST  : "; : PRINT BST; : PRINT " ";
 176 PRINT CHR$ (93);
 
 197 REM ++++++++++++++++++++++++++++++++++++
