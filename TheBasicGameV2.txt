@@ -10,6 +10,7 @@
 30 MX = 40 : MY = 12
 32 OMX = 40
 34 SCO = 0
+36 BST = 0
 
 47 REM ++++++++++++++++++++++++++++++++++++
 48 REM HOME SCREEN
@@ -33,15 +34,15 @@
 107 REM ++++++++++++++++++++++++++++++++++++
 108 REM FILL AND PRINT FLOOR
 109 REM ++++++++++++++++++++++++++++++++++++
-110 GOSUB 2000
-2000 HTAB 1 : VTAB 20
-2005 FOR I = 0 TO 4
-2010 FOR J = 0 TO 39
-2020 CEILING1(I, J) = 255
-2030 PRINT CHR$ (CEILING1(I, J));
-2040 NEXT J
-2045 NEXT I
-2050 RETURN
+110 GOSUB 20000
+20000 HTAB 1 : VTAB 20
+20005 FOR I = 0 TO 4
+20010 FOR J = 0 TO 39
+20020 CEILING1(I, J) = 255
+20030 PRINT CHR$ (CEILING1(I, J));
+20040 NEXT J
+20045 NEXT I
+20050 RETURN
 
 117 REM ++++++++++++++++++++++++++++++++++++
 118 REM SHOW CONTROLS
@@ -59,7 +60,12 @@
 158 PRINT CHR$ (91); :PRINT " ";
 160 PRINT "SCORE : "; : PRINT SCO; : PRINT " ";
 162 PRINT CHR$ (93);
-165 SCO = SCO + 1
+178 SCO = SCO + 1
+167 IF SCO > BST THEN BST = SCO
+170 HTAB 1 : VTAB 3
+172 PRINT CHR$ (91); :PRINT " ";
+174 PRINT "BEST : "; : PRINT BST; : PRINT " ";
+176 PRINT CHR$ (93);
 
 197 REM ++++++++++++++++++++++++++++++++++++
 198 REM GET USER INPUT
@@ -109,10 +115,16 @@
 799 REM ++++++++++++++++++++++++++++++++++++
 800 FOR T = 0 TO 700 : NEXT T
 
-
+897 REM ++++++++++++++++++++++++++++++++++++
+898 REM GAME LOOP
+899 REM ++++++++++++++++++++++++++++++++++++
 900 GOTO 150
 
+4997 REM ++++++++++++++++++++++++++++++++++++
+4998 REM END SCREEN
+4999 REM ++++++++++++++++++++++++++++++++++++
 5000 HOME
+5005 IF SCO > BST THEN BST = SCO
 5010 HTAB 16 : VTAB 6
 5020 PRINT "GAME OVER"
 5030 HTAB 10 : VTAB 10
@@ -121,3 +133,21 @@
 5060 PRINT SCO
 5070 HTAB 10 : VTAB 12
 5080 PRINT "THANKS FOR PLAYING!"
+
+5200 HTAB 10 : VTAB 14
+5210 PRINT "PRESS X TO PLAY AGAIN"
+5220 GET K$
+5230 IF K$ ="X" THEN GOTO 6020
+
+
+6017 REM ++++++++++++++++++++++++++++++++++++
+6018 REM VARIABLE RESETTING
+6019 REM ++++++++++++++++++++++++++++++++++++
+6020 X = 6 : Y = 12
+6022 OLDY = 12
+6024 CPT = 0
+6030 MX = 40 : MY = 12
+6032 OMX = 40
+6034 SCO = 0
+6040 HOME
+6050 GOTO 100
