@@ -146,9 +146,9 @@
 5070 HTAB 6 : VTAB 14 : PRINT "Best score : "
 5090 HTAB 23 : VTAB 14 : PRINT BST
 5100 HTAB 10 : VTAB 18 : PRINT "Thanks for playing!"
-5110 HTAB 2 : VTAB 22 : PRINT "Press X to play again"
+5110 HTAB 2 : VTAB 22 : PRINT "Press any key to play again"
 5220 HTAB 2 : VTAB 23 : GET K$
-5230 IF K$ ="X" THEN GOTO 6020
+5230 IF K$ THEN GOTO 6020
 
 
 6017 REM ++++++++++++++++++++++++++++++++++++
