@@ -1,0 +1,193 @@
+10 HOME
+17 REM ++++++++++++++++++++++++++++++++++++
+18 REM VARIABLE DECLARATION
+19 REM ++++++++++++++++++++++++++++++++++++
+20 GOSUB 3000
+
+
+46 A = 4
+47 REM ++++++++++++++++++++++++++++++++++++
+48 REM HOME SCREEN
+49 REM ++++++++++++++++++++++++++++++++++++
+50 HTAB 12 : VTAB 4 : PRINT "THE BAT ADVENTURE"
+56 HTAB 3 : VTAB 8 : PRINT "# Avoid the danger of the cave and #"
+57 HTAB 3 : VTAB 9 : PRINT "#         reach the exit           #"
+61 HTAB 30 : VTAB 5 : PRINT "by gianad"
+62 HTAB 2 : VTAB 8 + A : PRINT "Controls :"
+64 HTAB 6 : VTAB 10 + A: PRINT "Up = W"
+66 HTAB 6 : VTAB 12 + A: PRINT "Down = S"
+68 HTAB 6 : VTAB 14 + A: PRINT "Any key = Stop moving"
+69 HTAB 6 : VTAB 16 + A : PRINT "Quit game = Q"
+70 HTAB 2 : VTAB 19 + A: PRINT "To start press any key"
+72 HTAB 24 : VTAB 19 + A: GET A$ : HOME
+
+97 REM ++++++++++++++++++++++++++++++++++++
+98 REM FILL AND PRINT CEILING
+99 REM ++++++++++++++++++++++++++++++++++++
+100 GOSUB 1000
+1000 HTAB 1 : VTAB 1
+1005 FOR I = 1 TO 4
+1010 FOR J = 0 TO 39
+1020 CEILING1(I, J) = 255
+1030 PRINT CHR$(CEILING1(I, J));
+1040 NEXT J
+1045 NEXT I
+1080 RETURN
+
+107 REM ++++++++++++++++++++++++++++++++++++
+108 REM FILL AND PRINT FLOOR
+109 REM ++++++++++++++++++++++++++++++++++++
+110 GOSUB 20000
+20000 HTAB 1 : VTAB 19
+20005 FOR I = 0 TO 4
+20010 FOR J = 0 TO 39
+20020 CEILING1(I, J) = 255
+20030 PRINT CHR$ (CEILING1(I, J));
+20040 NEXT J
+20045 NEXT I
+20050 HTAB 11 : VTAB 20 : PRINT "                   "
+20055 HTAB 11 : VTAB 21 : PRINT "                   "
+20060 HTAB 11 : VTAB 22 : PRINT "                   "
+20070 HTAB 12 : VTAB 21 : PRINT "THE BAT ADVENTURE"
+20080 RETURN
+
+117 REM ++++++++++++++++++++++++++++++++++++
+118 REM SHOW CONTROLS
+119 REM ++++++++++++++++++++++++++++++++++++
+120 REM HTAB 32 : VTAB 1
+122 REM PRINT "W = UP"
+124 REMHTAB 32 : VTAB 2 : PRINT "S = DOWN"
+126 REMHTAB 32 : VTAB 3 : PRINT "Q = QUIT"
+128 REMHTAB 32 : VTAB 4 : PRINT "D/A = stay"
+
+147 REM ++++++++++++++++++++++++++++++++++++
+148 REM DISPLAY SCORE
+149 REM ++++++++++++++++++++++++++++++++++++
+150 HTAB 1 : VTAB 2
+158 PRINT CHR$ (91); :PRINT " ";
+160 PRINT "SCORE : "; : PRINT SCO; : PRINT " ";
+162 PRINT CHR$ (93);
+178 SCO = SCO + 1
+167 IF SCO > BST THEN BST = SCO
+170 HTAB 1 : VTAB 3
+172 PRINT CHR$ (91); :PRINT " ";
+174 PRINT "BEST  : "; : PRINT BST; : PRINT " ";
+176 PRINT CHR$ (93);
+
+197 REM ++++++++++++++++++++++++++++++++++++
+198 REM GET USER INPUT
+199 REM ++++++++++++++++++++++++++++++++++++
+200 IF PEEK (-16384)>127 THEN GET K$
+205 IF K$ ="Q" THEN GOTO 5000
+210 IF K$ = "W" AND Y > 6 THEN Y = Y - 1
+220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
+250 POKE -16368,0
+
+
+247 REM ++++++++++++++++++++++++++++++++++++
+248 REM PRINT PLAYER
+249 REM ++++++++++++++++++++++++++++++++++++
+252 CPT = CPT + 1
+270 HTAB X : VTAB OLDY
+275 PRINT "   "
+280 HTAB X+1 : VTAB OLDY - 1
+285 PRINT " "
+300 HTAB X : VTAB Y
+305 OLDY = Y 
+310 IF CPT < 3 THEN PRINT "^0^";
+320 IF CPT >=3 THEN PRINT "-0-";
+330 IF CPT >= 6 THEN CPT = 0
+340 HTAB X+1 : VTAB Y-1
+350 PRINT "m"
+
+397 REM ++++++++++++++++++++++++++++++++++++
+398 REM PRINT ENNEMY
+399 REM ++++++++++++++++++++++++++++++++++++
+400 HTAB OMX : VTAB MY : PRINT " "
+402 HTAB MX : VTAB MY : PRINT "#"
+404 OMX = MX
+406 MX = MX -1
+408 IF MX <1 THEN MX = 40
+
+412 HTAB OSX : VTAB SY : PRINT "  "
+413 HTAB OSX : VTAB SY + 1: PRINT " "
+414 HTAB SX : VTAB SY + 1 : PRINT "*"
+416 HTAB SX : VTAB SY : PRINT "**"
+418 HTAB SX : VTAB SY + 1 : PRINT "*"
+419 OSX = SX
+420 SX = SX - 0.5
+422 IF SX <1 THEN SX = 39
+
+497 REM ++++++++++++++++++++++++++++++++++++
+498 REM CHECK COLLISION
+499 REM ++++++++++++++++++++++++++++++++++++
+500 IF MX = X AND MY = Y THEN GOTO 5000
+510 IF MX = X AND MY = Y-1 THEN GOTO 5000
+
+520 IF SX = X AND SY = Y THEN GOTO 5000
+522 IF SX = X AND SY = Y-1 THEN GOTO 5000
+524 IF SX = X AND SY + 1 = Y THEN GOTO 5000
+526 IF SX = X AND SY + 1 = Y-1 THEN GOTO 5000
+
+797 REM ++++++++++++++++++++++++++++++++++++
+798 REM SLOW GAME
+799 REM ++++++++++++++++++++++++++++++++++++
+800 FOR T = 0 TO SPD : NEXT T
+
+897 REM ++++++++++++++++++++++++++++++++++++
+898 REM GAME LOOP
+899 REM ++++++++++++++++++++++++++++++++++++
+900 GOTO 150
+
+4997 REM ++++++++++++++++++++++++++++++++++++
+4998 REM END SCREEN
+4999 REM ++++++++++++++++++++++++++++++++++++
+5000 HOME
+5005 IF SCO > BST THEN BST = SCO
+5010 HTAB 12 : VTAB 4 : PRINT "THE BAT ADVENTURE"
+5012 HTAB 30 : VTAB 5 : PRINT "by gianad"
+5015 HTAB 16 : VTAB 8 : PRINT "GAME OVER"
+5030 HTAB 6 : VTAB 12 : PRINT "Your score : "
+5050 HTAB 23 : VTAB 12 : PRINT SCO
+5070 HTAB 6 : VTAB 14 : PRINT "Best score : "
+5090 HTAB 23 : VTAB 14 : PRINT BST
+5100 HTAB 10 : VTAB 18 : PRINT "Thanks for playing!"
+5110 HTAB 2 : VTAB 22 : PRINT "Press any key to play again"
+5220 HTAB 2 : VTAB 23 : GET K$
+5230 IF K$ THEN GOTO 6020
+
+
+6017 REM ++++++++++++++++++++++++++++++++++++
+6018 REM VARIABLE RESETTING
+6019 REM ++++++++++++++++++++++++++++++++++++
+6020 X = 6 : Y = 12
+6022 OLDY = 12
+6024 CPT = 0
+6026 SCO = 0
+6029 REM MONSTERS VARIABLE RESETTING
+6030 MX = 40 : MY = 12
+6032 OMX = 40
+6040 MX = 40 : MY = 12
+6042 OMX = 40
+6044 SX = 39 : SY = 5 : OSX = 39
+
+6040 HOME
+6050 GOTO 100
+
+2997 REM ++++++++++++++++++++++++++++++++++++
+2998 REM VARIABLE DECLARATION
+2999 REM ++++++++++++++++++++++++++++++++++++
+3000 X = 6 : Y = 12
+3002 OLDY = 12
+3004 CPT = 0
+3006 DIM CEILING1(4,39)
+3008 DIM FLOOR1(4,39)
+3010 SCO = 0
+3012 BST = 0
+3014 SPD = 500
+3199 REM MONSTER'S VARIABLES
+3200 MX = 40 : MY = 12
+3202 OMX = 40
+3210 SX = 39 : SY = 5 : OSX = 39
+
+3400 RETURN
