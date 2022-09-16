@@ -3,28 +3,175 @@
 18 REM VARIABLE DECLARATION
 19 REM ++++++++++++++++++++++++++++++++++++
 20 GOSUB 3000
-
-
-46 A = 4
+22 REM
 47 REM ++++++++++++++++++++++++++++++++++++
 48 REM HOME SCREEN
 49 REM ++++++++++++++++++++++++++++++++++++
-50 HTAB 10 : VTAB 3 : PRINT CHR$ (91)" THE BAT ADVENTURE "CHR$ (93)
-56 HTAB 3 : VTAB 7 : PRINT "| Avoid the danger of the cave and |"
-57 HTAB 3 : VTAB 8 : PRINT "|         reach the exit           |"
-61 HTAB 31 : VTAB 4 : PRINT "by gianad"
-62 HTAB 2 : VTAB 8 + A : PRINT "Controls :"
-64 HTAB 6 : VTAB 10 + A: PRINT "Up = W"
-66 HTAB 6 : VTAB 12 + A: PRINT "Down = S"
-68 HTAB 6 : VTAB 14 + A: PRINT "Any key = Stop moving"
-69 HTAB 6 : VTAB 16 + A : PRINT "Quit game = Q"
+50 A = 4
+52 HTAB 10 : VTAB 3 : PRINT CHR$ (91)" THE BAT ADVENTURE "CHR$ (93)
+54 HTAB 23 : VTAB 5 : PRINT "by David Gianadda"
+56 HTAB 3 : VTAB 8 : PRINT "| Avoid the danger of the cave and |"
+58 HTAB 3 : VTAB 9 : PRINT "|         reach the exit           |"
+60 HTAB 2 : VTAB 8 + A : PRINT "Controls :"
+62 HTAB 6 : VTAB 10 + A: PRINT "UP = W"
+64 HTAB 6 : VTAB 12 + A: PRINT "DOWN = S"
+66 HTAB 6 : VTAB 14 + A: PRINT "STOP = any key"
+68 HTAB 6 : VTAB 16 + A : PRINT "QUIT = Q"
 70 HTAB 2 : VTAB 19 + A: PRINT "To start press any key"
 72 HTAB 24 : VTAB 19 + A: GET A$ : HOME
-
+74 REM
 97 REM ++++++++++++++++++++++++++++++++++++
 98 REM FILL AND PRINT CEILING AND FLOOR
 99 REM ++++++++++++++++++++++++++++++++++++
 100 GOSUB 1000
+102 REM
+147 REM ++++++++++++++++++++++++++++++++++++
+148 REM DISPLAY SCORE
+149 REM ++++++++++++++++++++++++++++++++++++
+150 HTAB 1 : VTAB 2
+158 PRINT CHR$ (91); :PRINT " ";
+160 PRINT "SCORE : "; : PRINT SCO; : PRINT " ";
+162 PRINT CHR$ (93);
+167 IF SCO > BST THEN BST = SCO
+170 HTAB 1 : VTAB 3
+172 PRINT CHR$ (91); :PRINT " ";
+174 PRINT "BEST  : "; : PRINT BST; : PRINT " ";
+176 PRINT CHR$ (93);
+178 HTAB 24 : VTAB 2
+180 PRINT CHR$ (91); :PRINT " ";
+182 PRINT "LEVEL : "; : PRINT LVL; : PRINT " ";
+184 PRINT CHR$ (93);
+190 SCO = SCO + 1
+192 REM
+197 REM ++++++++++++++++++++++++++++++++++++
+198 REM GET USER INPUT
+199 REM ++++++++++++++++++++++++++++++++++++
+200 IF PEEK (-16384)>127 THEN GET K$
+205 IF K$ ="Q" THEN GOTO 5000
+210 IF K$ = "W" AND Y > 7 THEN Y = Y - 1
+220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
+250 POKE -16368,0
+251 REM
+257 REM ++++++++++++++++++++++++++++++++++++
+258 REM PRINT PLAYER
+259 REM ++++++++++++++++++++++++++++++++++++
+260 CPT = CPT + 1
+270 HTAB X : VTAB OLDY
+275 PRINT "   "
+280 HTAB X+1 : VTAB OLDY - 1
+285 PRINT " "
+300 HTAB X : VTAB Y
+305 OLDY = Y 
+310 IF CPT < 3 THEN PRINT "^0^";
+320 IF CPT >=3 THEN PRINT "-0-";
+330 IF CPT >= 6 THEN CPT = 0
+340 HTAB X+1 : VTAB Y-1
+350 PRINT "m"
+351 REM
+367 REM ++++++++++++++++++++++++++++++++++++
+368 REM PRINT ENNEMY
+369 REM ++++++++++++++++++++++++++++++++++++
+370 REM flying monster
+372 HTAB OMX : VTAB MY : PRINT " "
+374 MCT = MCT + 1
+376 IF MCT = 6 THEN MY = MY - 1
+378 IF MCT = 12 THEN MY = MY + 1
+380 IF MCT = 18 THEN MY = MY + 1
+382 IF MCT > 24 THEN MY = 12
+384 IF MCT > 24 THEN MCT = 0
+386 HTAB MX : VTAB MY : PRINT "#"
+388 OMX = MX
+390 MX = MX -2
+392 IF MX <1 THEN MX = 40
+394 REM small stalactite
+412 HTAB OSX : VTAB SY : PRINT "  "
+413 HTAB OSX : VTAB SY + 1: PRINT " "
+414 HTAB SX : VTAB SY + 1 : PRINT "*"
+416 HTAB SX : VTAB SY : PRINT "**"
+419 OSX = SX
+420 SX = SX - 1
+422 IF SX <1 THEN SX = 39
+424 REM big stalactite
+426 HTAB OTX : VTAB TY : PRINT "   "
+427 HTAB OTX : VTAB TY + 1 : PRINT "  "
+428 HTAB OTX : VTAB TY + 2 : PRINT "  "
+429 HTAB OTX : VTAB TY + 3: PRINT " "
+430 HTAB TX : VTAB TY : PRINT "***"
+431 HTAB TX : VTAB TY + 1 : PRINT "**"
+432 HTAB TX : VTAB TY + 2 : PRINT "**"
+433 HTAB TX : VTAB TY + 3: PRINT "*"
+434 OTX = TX
+435 TX = TX -1
+436 IF TX <1 THEN TX = 39
+438 REM small stalagmite
+441 HTAB OUX : VTAB UY : PRINT " "
+442 HTAB OUX : VTAB UY + 1 : PRINT "  "
+443 HTAB UX : VTAB UY : PRINT "*"
+444 HTAB UX : VTAB UY + 1 : PRINT "**"
+445 OUX = UX
+446 UX = UX -1
+448 IF UX <1 THEN UX = 39
+449 REM big stalagmite
+450 HTAB OVX : VTAB VY : PRINT " "
+451 HTAB OVX : VTAB VY + 1 : PRINT "  "
+452 HTAB OVX : VTAB VY + 2 : PRINT "  "
+453 HTAB OVX : VTAB VY + 3 : PRINT "   "
+454 HTAB VX : VTAB VY : PRINT "*"
+455 HTAB VX : VTAB VY + 1 : PRINT "**"
+456 HTAB VX : VTAB VY + 2 : PRINT "**"
+457 HTAB VX : VTAB VY + 3 : PRINT "***"
+458 OVX = VX
+459 VX = VX -1
+460 IF VX <1 THEN VX = 38
+462 REM
+497 REM ++++++++++++++++++++++++++++++++++++
+498 REM CHECK COLLISION
+499 REM ++++++++++++++++++++++++++++++++++++
+500 REM flying monster
+502 IF MX = X AND MY = Y THEN GOTO 5000
+510 IF MX = X AND MY = Y-1 THEN GOTO 5000
+518 REM small stalactite
+520 IF SX = X AND SY = Y THEN GOTO 5000
+522 IF SX = X AND SY = Y-1 THEN GOTO 5000
+524 IF SX = X AND SY + 1 = Y THEN GOTO 5000
+526 IF SX = X AND SY + 1 = Y-1 THEN GOTO 5000
+528 REM big stactite
+530 FOR I = 0 TO 3
+535 IF TX = X AND TY + I = Y THEN GOTO 5000
+536 IF TX = X AND TY + I = Y -1 THEN GOTO 5000
+537 NEXT I
+538 REM small stalagmite
+540 IF UX = X AND UY = Y THEN GOTO 5000
+550 IF UX = X AND UY = Y-1 THEN GOTO 5000
+552 REM big stalagmite
+554 FOR I = 0 TO 3
+556 IF VX = X AND VY + I = Y THEN GOTO 5000
+558 IF VX = X AND VY + I = Y - 1 THEN GOTO 5000
+560 NEXT I
+562 REM
+797 REM ++++++++++++++++++++++++++++++++++++
+798 REM SLOW GAME
+799 REM ++++++++++++++++++++++++++++++++++++
+800 FOR T = 0 TO SPD : NEXT T
+810 IF SCO > 50 THEN SPD = 600 : LVL = 1
+815 IF SCO > 100 THEN SPD = 500 : LVL = 2
+820 IF SCO > 150 THEN SPD = 400 : LVL = 3
+825 IF SCO > 200 THEN SPD = 300 : LVL = 4
+830 IF SCO > 250 THEN SPD = 200 : LVL = 5
+835 IF SCO > 300 THEN SPD = 100 : LVL = 6
+840 IF SCO > 350 THEN SPD = 75 : LVL = 7
+845 IF SCO > 400 THEN SPD = 50 : LVL = 8
+850 IF SCO > 450 THEN SPD = 25 : LVL = 9
+855 IF SCO > 500 THEN SPD = 0 : LVL = 10
+860 REM
+897 REM ++++++++++++++++++++++++++++++++++++
+898 REM GAME LOOP
+899 REM ++++++++++++++++++++++++++++++++++++
+900 GOTO 150
+902 REM
+997 REM ++++++++++++++++++++++++++++++++++++
+998 REM SUB FILL AND PRINT CEILING AND FLOOR
+999 REM ++++++++++++++++++++++++++++++++++++
 1000 HTAB 1 : VTAB 1
 1005 FOR I = 0 TO 4
 1010 FOR J = 0 TO 39
@@ -41,202 +188,7 @@
 1135 HTAB 11 : VTAB 21 : PRINT "  THE BAT ADVENTURE  " 
 1140 HTAB 11 : VTAB 22 : PRINT "                     "
 1150 RETURN
-
-117 REM ++++++++++++++++++++++++++++++++++++
-118 REM SHOW CONTROLS
-119 REM ++++++++++++++++++++++++++++++++++++
-120 REM HTAB 32 : VTAB 1
-122 REM PRINT "W = UP"
-124 REMHTAB 32 : VTAB 2 : PRINT "S = DOWN"
-126 REMHTAB 32 : VTAB 3 : PRINT "Q = QUIT"
-128 REMHTAB 32 : VTAB 4 : PRINT "D/A = stay"
-
-147 REM ++++++++++++++++++++++++++++++++++++
-148 REM DISPLAY SCORE
-149 REM ++++++++++++++++++++++++++++++++++++
-150 HTAB 1 : VTAB 2
-158 PRINT CHR$ (91); :PRINT " ";
-160 PRINT "SCORE : "; : PRINT SCO; : PRINT " ";
-162 PRINT CHR$ (93);
-167 IF SCO > BST THEN BST = SCO
-170 HTAB 1 : VTAB 3
-172 PRINT CHR$ (91); :PRINT " ";
-174 PRINT "BEST  : "; : PRINT BST; : PRINT " ";
-176 PRINT CHR$ (93);
-
-178 HTAB 24 : VTAB 2
-180 PRINT CHR$ (91); :PRINT " ";
-182 PRINT "LEVEL : "; : PRINT LVL; : PRINT " ";
-184 PRINT CHR$ (93);
-190 SCO = SCO + 1
-
-197 REM ++++++++++++++++++++++++++++++++++++
-198 REM GET USER INPUT
-199 REM ++++++++++++++++++++++++++++++++++++
-200 IF PEEK (-16384)>127 THEN GET K$
-205 IF K$ ="Q" THEN GOTO 5000
-210 IF K$ = "W" AND Y > 7 THEN Y = Y - 1
-220 IF K$ = "S" AND Y < 18 THEN Y = Y + 1
-250 POKE -16368,0
-
-
-247 REM ++++++++++++++++++++++++++++++++++++
-248 REM PRINT PLAYER
-249 REM ++++++++++++++++++++++++++++++++++++
-252 CPT = CPT + 1
-270 HTAB X : VTAB OLDY
-275 PRINT "   "
-280 HTAB X+1 : VTAB OLDY - 1
-285 PRINT " "
-300 HTAB X : VTAB Y
-305 OLDY = Y 
-310 IF CPT < 3 THEN PRINT "^0^";
-320 IF CPT >=3 THEN PRINT "-0-";
-330 IF CPT >= 6 THEN CPT = 0
-340 HTAB X+1 : VTAB Y-1
-350 PRINT "m"
-
-367 REM ++++++++++++++++++++++++++++++++++++
-368 REM PRINT ENNEMY
-369 REM ++++++++++++++++++++++++++++++++++++
-370 HTAB OMX : VTAB MY : PRINT " "
-372 MCT = MCT + 1
-374 IF MCT = 6 THEN MY = MY - 1
-376 IF MCT = 12 THEN MY = MY + 1
-378 IF MCT = 18 THEN MY = MY + 1
-380 IF MCT > 24 THEN MY = 12
-381 IF MCT > 24 THEN MCT = 0
-382 HTAB MX : VTAB MY : PRINT "#"
-384 OMX = MX
-386 MX = MX -2
-388 IF MX <1 THEN MX = 40
-
-
-412 HTAB OSX : VTAB SY : PRINT "  "
-413 HTAB OSX : VTAB SY + 1: PRINT " "
-414 HTAB SX : VTAB SY + 1 : PRINT "*"
-416 HTAB SX : VTAB SY : PRINT "**"
-418 HTAB SX : VTAB SY + 1 : PRINT "*"
-419 OSX = SX
-420 SX = SX - 1
-422 IF SX <1 THEN SX = 39
-
-426 HTAB OTX : VTAB TY : PRINT "   "
-427 HTAB OTX : VTAB TY + 1 : PRINT "  "
-428 HTAB OTX : VTAB TY + 2 : PRINT "  "
-429 HTAB OTX : VTAB TY + 3: PRINT " "
-430 HTAB TX : VTAB TY : PRINT "***"
-431 HTAB TX : VTAB TY + 1 : PRINT "**"
-432 HTAB TX : VTAB TY + 2 : PRINT "**"
-433 HTAB TX : VTAB TY + 3: PRINT "*"
-434 OTX = TX
-435 TX = TX -1
-436 IF TX <1 THEN TX = 39
-
-441 HTAB OUX : VTAB UY : PRINT " "
-442 HTAB OUX : VTAB UY + 1 : PRINT "  "
-443 HTAB UX : VTAB UY : PRINT "*"
-444 HTAB UX : VTAB UY + 1 : PRINT "**"
-445 OUX = UX
-446 UX = UX -1
-448 IF UX <1 THEN UX = 39
-
-450 HTAB OVX : VTAB VY : PRINT " "
-451 HTAB OVX : VTAB VY + 1 : PRINT "  "
-452 HTAB OVX : VTAB VY + 2 : PRINT "  "
-453 HTAB OVX : VTAB VY + 3 : PRINT "   "
-454 HTAB VX : VTAB VY : PRINT "*"
-455 HTAB VX : VTAB VY + 1 : PRINT "**"
-456 HTAB VX : VTAB VY + 2 : PRINT "**"
-457 HTAB VX : VTAB VY + 3 : PRINT "***"
-458 OVX = VX
-459 VX = VX -1
-460 IF VX <1 THEN VX = 38
-
-497 REM ++++++++++++++++++++++++++++++++++++
-498 REM CHECK COLLISION
-499 REM ++++++++++++++++++++++++++++++++++++
-500 IF MX = X AND MY = Y THEN GOTO 5000
-510 IF MX = X AND MY = Y-1 THEN GOTO 5000
-
-520 IF SX = X AND SY = Y THEN GOTO 5000
-522 IF SX = X AND SY = Y-1 THEN GOTO 5000
-524 IF SX = X AND SY + 1 = Y THEN GOTO 5000
-526 IF SX = X AND SY + 1 = Y-1 THEN GOTO 5000
-
-530 FOR I = 0 TO 3
-535 IF TX = X AND TY + I = Y THEN GOTO 5000
-536 IF TX = X AND TY + I = Y -1 THEN GOTO 5000
-537 NEXT I
-
-540 IF UX = X AND UY = Y THEN GOTO 5000
-550 IF UX = X AND UY = Y-1 THEN GOTO 5000
-
-554 FOR I = 0 TO 3
-556 IF VX = X AND VY + I = Y THEN GOTO 5000
-558 IF VX = X AND VY + I = Y - 1 THEN GOTO 5000
-560 NEXT I
-
-797 REM ++++++++++++++++++++++++++++++++++++
-798 REM SLOW GAME
-799 REM ++++++++++++++++++++++++++++++++++++
-800 FOR T = 0 TO SPD : NEXT T
-810 IF SCO > 50 THEN SPD = 600 : LVL = 1
-815 IF SCO > 100 THEN SPD = 500 : LVL = 2
-820 IF SCO > 150 THEN SPD = 400 : LVL = 3
-825 IF SCO > 200 THEN SPD = 300 : LVL = 4
-830 IF SCO > 250 THEN SPD = 200 : LVL = 5
-835 IF SCO > 300 THEN SPD = 100 : LVL = 6
-840 IF SCO > 350 THEN SPD = 75 : LVL = 7
-845 IF SCO > 400 THEN SPD = 50 : LVL = 8
-850 IF SCO > 450 THEN SPD = 25 : LVL = 9
-855 IF SCO > 500 THEN SPD = 0 : LVL = 10
-
-
-
-
-897 REM ++++++++++++++++++++++++++++++++++++
-898 REM GAME LOOP
-899 REM ++++++++++++++++++++++++++++++++++++
-900 GOTO 150
-
-4997 REM ++++++++++++++++++++++++++++++++++++
-4998 REM END SCREEN
-4999 REM ++++++++++++++++++++++++++++++++++++
-5000 HOME
-5005 IF SCO > BST THEN BST = SCO
-5010 HTAB 12 : VTAB 4 : PRINT "THE BAT ADVENTURE"
-5012 HTAB 30 : VTAB 5 : PRINT "by gianad"
-5015 HTAB 16 : VTAB 8 : PRINT "GAME OVER"
-5030 HTAB 6 : VTAB 12 : PRINT "Your score : "
-5050 HTAB 23 : VTAB 12 : PRINT SCO
-5070 HTAB 6 : VTAB 14 : PRINT "Best score : "
-5090 HTAB 23 : VTAB 14 : PRINT BST
-5100 HTAB 10 : VTAB 18 : PRINT "Thanks for playing!"
-5110 HTAB 2 : VTAB 22 : PRINT "Press any key to play again"
-5220 HTAB 2 : VTAB 23 : GET K$
-5230 IF K$ THEN GOTO 6020
-
-
-6017 REM ++++++++++++++++++++++++++++++++++++
-6018 REM VARIABLE RESETTING
-6019 REM ++++++++++++++++++++++++++++++++++++
-6020 X = 6 : Y = 12
-6022 OLDY = 12
-6024 CPT = 0
-6026 SCO = 0
-6027 LVL = 0
-6028 SPD = 700
-6029 REM MONSTERS VARIABLE RESETTING
-6030 MX = 40 : MY = 12 : OMX = 40 : MCT = 0
-6044 SX = 12 : SY = 6 : OSX = 26
-6046 TX = 34 : TY = 6 : OTX = 40
-6048 UX = 8 : UY = 17 : OUX = 39
-6050 VX = 24 : VY = 15 : OVX = 24
-   
-6100 HOME
-6150 GOTO 100
-
+1152 REM
 2997 REM ++++++++++++++++++++++++++++++++++++
 2998 REM VARIABLE DECLARATION
 2999 REM ++++++++++++++++++++++++++++++++++++
@@ -260,5 +212,39 @@
 3230 UX = 8 : UY = 17 : OUX = 39
 3239 REM BIG STALAGMITE
 3240 VX = 24 : VY = 15 : OVX = 24
-
 3400 RETURN
+3402 REM
+4997 REM ++++++++++++++++++++++++++++++++++++
+4998 REM END SCREEN
+4999 REM ++++++++++++++++++++++++++++++++++++
+5000 HOME
+5005 IF SCO > BST THEN BST = SCO
+5010 HTAB 10 : VTAB 3 : PRINT CHR$ (91)" THE BAT ADVENTURE "CHR$ (93)
+5020 HTAB 23 : VTAB 5 : PRINT "by David Gianadda"
+5015 HTAB 14 : VTAB 8 : PRINT "| GAME OVER |"
+5030 HTAB 6 : VTAB 12 : PRINT "Your score : "
+5050 HTAB 23 : VTAB 12 : PRINT SCO
+5070 HTAB 6 : VTAB 14 : PRINT "Best score : "
+5090 HTAB 23 : VTAB 14 : PRINT BST
+5100 HTAB 10 : VTAB 18 : PRINT "Thanks for playing!"
+5110 HTAB 2 : VTAB 22 : PRINT "Press any key to play again"
+5220 HTAB 2 : VTAB 23 : GET K$
+5230 IF K$ THEN GOTO 6020
+5300 REM
+6017 REM ++++++++++++++++++++++++++++++++++++
+6018 REM VARIABLE RESETTING
+6019 REM ++++++++++++++++++++++++++++++++++++
+6020 X = 6 : Y = 12
+6022 OLDY = 12
+6024 CPT = 0
+6026 SCO = 0
+6027 LVL = 0
+6028 SPD = 700
+6029 REM MONSTERS VARIABLE RESETTING
+6030 MX = 40 : MY = 12 : OMX = 40 : MCT = 0
+6044 SX = 12 : SY = 6 : OSX = 26
+6046 TX = 34 : TY = 6 : OTX = 40
+6048 UX = 8 : UY = 17 : OUX = 39
+6050 VX = 24 : VY = 15 : OVX = 24  
+6100 HOME
+6150 GOTO 100
