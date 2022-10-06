@@ -8,10 +8,10 @@ In this game you control a little bat that is trying to navigate in a perilous c
 ![](BasicBat.gif)
 
 ## How to play  
-- 1) Open the emulator https://www.calormen.com/jsbasic/  
-- 2) Copy the script below also found here : [TheBatAdventure](TheBatAdventure)    
-- 3) Paste the script instead of the default "10 PRINT "Hello World"" of the emulator  
-- 4) Click "Run" and enjoy!  
+- 1) **Open** the emulator https://www.calormen.com/jsbasic/  
+- 2) **Copy** the script below also found here : [TheBatAdventure](TheBatAdventure)    
+- 3) **Paste** the script instead of the default "10 PRINT "Hello World"" of the emulator  
+- 4) **Click** "Run" and enjoy!  
  
 
 ## Sources  
