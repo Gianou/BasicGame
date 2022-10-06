@@ -9,8 +9,7 @@ In this game you control a little bat that is trying to navigate in a perilous c
 
 ## How to play  
 - A) **Open** the emulator https://www.calormen.com/jsbasic/  
-- B) **Copy** the script below also found here : [TheBatAdventure](TheBatAdventure)   
-- <a href="https://www.calormen.com/jsbasic/" target="_blank">https://www.calormen.com/jsbasic/</a>   
+- B) **Copy** the script of the game below also found here : [TheBatAdventure](TheBatAdventure)     
 - C) **Paste** the script instead of the default "10 PRINT "Hello World"" of the emulator  
 - D) **Click** "Run" and enjoy!  
  
@@ -19,6 +18,8 @@ In this game you control a little bat that is trying to navigate in a perilous c
 Emulator : https://www.calormen.com/jsbasic/  
 Video form The Coding Train that inspired this project : https://www.youtube.com/watch?v=7r83N3c2kPw  
 
+
+## Script of the Game  
 ```  
 1 REM Made by David Gianadda
 2 REM in septembre 2022
