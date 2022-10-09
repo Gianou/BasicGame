@@ -5,7 +5,7 @@ I made this fun little project to explore and experiment programming with BASIC 
   
 In this game you control a little bat that is trying to navigate in a perilous cave filled with stalactite, stalagmite and flying monsters.  
 
-![](BasicBat.gif)
+![](BasicBatCRTFinal.gif)
 
 ## How to play  
 - A) **Open** the emulator https://www.calormen.com/jsbasic/  
